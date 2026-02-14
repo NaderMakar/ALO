@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valentine ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family:Arial;
+overflow:hidden;
+color:white;
+text-align:center;
+}
+
+.container{
+width:90%;
+max-width:400px;
+position:relative;
+z-index:2;
+}
+
+button{
+padding:12px 20px;
+font-size:18px;
+border:none;
+border-radius:10px;
+margin:10px;
+cursor:pointer;
+}
+
+/* YES BUTTON */
+#yesBtn{
+background:#ff2e63;
+color:white;
+font-size:20px;
+}
+
+/* 😡 NO BUTTON */
+#noBtn{
+background:#ff0000;
+color:white;
+position:fixed;
+height:60px;
+border-radius:50px;
+font-size:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:6px;
+padding:0 18px;
+transition:transform .2s ease;
+}
+
+#celebrate{
+display:none;
+font-size:24px;
+margin-top:15px;
+}
+
+/* FULLSCREEN OVERLAY */
+.fullscreen{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+background:black;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+.fullscreen img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:black;
+}
+
+/* TRY AGAIN BUTTON */
+#tryAgainBtn{
+position:absolute;
+bottom:40px;
+background:#ff2e63;
+color:white;
+display:none;
+}
+
+/* NICE TEXT */
+#niceText{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:clamp(28px,6vw,50px);
+color:white;
+text-shadow:0 0 20px black;
+font-weight:bold;
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Will you be my Valentine? ❤️</h2>
+
+<button id="yesBtn">Yes 😍</button>
+<button id="noBtn">😡 No</button>
+
+<div id="celebrate">🎉 Happy Valentine 🎉</div>
+</div>
+
+<!-- DON'T MESS FULLSCREEN -->
+<div id="dontMessScreen" class="fullscreen">
+<img src="./images/1.jpeg">
+<button id="tryAgainBtn">Try Again 🔁</button>
+</div>
+
+<!-- LOVE FULLSCREEN -->
+<div id="loveScreen" class="fullscreen">
+<img src="./images/2.jpeg">
+<div id="niceText">Nice choice &lt;3</div>
+</div>
+
+<script>
+
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const dontMessScreen=document.getElementById("dontMessScreen");
+const loveScreen=document.getElementById("loveScreen");
+const celebrate=document.getElementById("celebrate");
+const niceText=document.getElementById("niceText");
+const tryAgainBtn=document.getElementById("tryAgainBtn");
+
+let tries=0;
+
+/* 😡 NO ESCAPE */
+function moveNo(){
+
+tries++;
+
+noBtn.style.left=Math.random()*80+"vw";
+noBtn.style.top=Math.random()*80+"vh";
+
+noBtn.style.transform="scale(1.2)";
+setTimeout(()=>noBtn.style.transform="scale(1)",150);
+
+if(tries>=3){
+dontMessScreen.style.display="flex";
+tryAgainBtn.style.display="block";
+}
+}
+
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",moveNo);
+
+/* 🔁 TRY AGAIN */
+tryAgainBtn.onclick=function(){
+dontMessScreen.style.display="none";
+tryAgainBtn.style.display="none";
+tries=0;
+}
+
+/* ❤️ YES CLICK */
+yesBtn.onclick=function(){
+
+celebrate.style.display="block";
+
+setTimeout(()=>{
+loveScreen.style.display="flex";
+niceText.style.display="block";
+},2000);
+}
+
+</script>
+
+</body>
+</html>
